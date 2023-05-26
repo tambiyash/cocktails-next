@@ -3,6 +3,7 @@ import Cards from "@/components/Cards";
 import SearchInput from "@/components/SearchInput";
 import { Cocktail } from "@/types/cocktail";
 import { DEFAULT_SEARCH_COCKTAIL, SEARCH_COCKTAIL_BY_NAME } from "@/utils/constants";
+import getAllIngredients from "@/utils/mutation";
 import debounce from "@/utils/search";
 
 type ISearchParams = {
@@ -36,10 +37,9 @@ const Home = async ({ searchParams } : {searchParams: ISearchParams}) => {
       <SearchInput />
       <Cards>
         {cocktails.map((drink: Cocktail) => {
-          const ingredientKeys = Object.keys(drink).filter((key: string) => key.startsWith("strIngredient"));
-          const ingredients = ingredientKeys.map((key: string):string => drink[key as keyof Cocktail]).filter((ingred: string) => !!ingred);
+          const ingredients: string[] = getAllIngredients(drink);
           return (
-            <Card key={drink.idDrink} img={`${drink.strDrinkThumb}/preview`} title={drink.strDrink} description={drink.strInstructions} ingredients={ingredients} />
+            <Card href={`/${drink.idDrink}`} key={drink.idDrink} img={`${drink.strDrinkThumb}/preview`} title={drink.strDrink} description={drink.strInstructions} ingredients={ingredients} />
         )})}
       </Cards>
     </div>

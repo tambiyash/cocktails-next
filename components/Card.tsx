@@ -3,10 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link'
 import { useState } from 'react';
 import { CocktailCard } from '@/types/cocktail';
-
-const Tag = ({ name }: { name: string }) => (
-  <div className="p-1 h-fit text-xs bg-indigo-500 text-white rounded mr-2 mb-2">{name}</div>
-)
+import Tag from './Tag';
 
 const Card = ({ href, title, img, ingredients, description }: CocktailCard) => {
   const [hover, setHover] = useState(false);

@@ -1,8 +1,10 @@
+import { Ingredient } from "@/utils/mutation"
+
 export type CocktailCard = {
   href?: string,
   title: string,
   img?: string,
-  ingredients: Array<string>,
+  ingredients: Array<Ingredient>,
   description?: string,
 }
 

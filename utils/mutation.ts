@@ -1,10 +1,24 @@
 import { Cocktail } from "@/types/cocktail";
 
+export type Ingredient = {
+  name: string,
+  measure: string
+}
+
 const getAllIngredients = (drink: Cocktail) => {
-  const ingredientKeys = Object.keys(drink).filter((key: string) => key.startsWith("strIngredient"));
-  const ingredients = ingredientKeys.map((key: string):string => drink[key as keyof Cocktail]).filter((ingred: string) => !!ingred);
+  const drinkKeys = Object.keys(drink);
+  let ingredients: Ingredient[] = [];
+  for (const key of drinkKeys) {
+    if (key.startsWith("strIngredient") && drink[key]) {
+      const ingredientIndex = key[key.length - 1];
+      ingredients.push({
+        name: drink[key],
+        measure: drink[`strMeasure${ingredientIndex}`] || "-"
+      });
+    }
+  }
   return ingredients;
 }
 
-export default getAllIngredients;
+export { getAllIngredients };
 

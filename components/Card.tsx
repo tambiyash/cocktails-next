@@ -17,7 +17,7 @@ const Card = ({ href, title, img, ingredients, description }: CocktailCard) => {
               {title}
             </h1>
             <div className="flex flex-row flex-wrap p-4 h-auto">
-              {ingredients.map(item => <Tag key={item} name={item} />)}
+              {ingredients.map(item => <Tag key={item.name} name={item.name} className="mb-2"/>)}
             </div>
             {description && <h2 className="pt-2 mb-4 text font-semibold line-clamp-2">
               {description}

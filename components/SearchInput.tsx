@@ -1,8 +1,9 @@
 "use client";
-import { useTransition } from "react";
+import React, { useTransition } from 'react';
+import { motion } from 'motion/react';
 import { usePathname, useRouter } from "next/navigation";
 
-const SearchInput = ({ value }: { value?: string }) => {
+const SearchInput = () => {
   const { replace } = useRouter();
   const [isPending, startTransition] = useTransition();
   const pathname = usePathname();
@@ -25,25 +26,20 @@ const SearchInput = ({ value }: { value?: string }) => {
   const handleOnChange = (event: React.ChangeEvent) => {
     handleSearch((event.target as HTMLInputElement).value);
   }
-
   return (
-    <div className="mb-6">
-        <label htmlFor="large-input" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Search Cocktails</label>
-        <input
-          type="text"
-          value={value}
-          id="large-input"
-          className="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          onChange={handleOnChange}
-        />
-        <p id="helper-text-explanation" className="mt-2 text-sm text-gray-500 dark:text-gray-400">Tips(y) for your drinks!</p>
-        {isPending && (
-          <div className="absolute top-0 bottom-0 left-0 flex justify-center items-center transform animate-spin 1s">
-            /
-          </div>
-        )}
+    <div className="relative mb-5 flex items-center justify-center">
+      <motion.input
+        initial={{ width: "500px" }}
+        animate={{ width: "500px" }}
+        whileFocus={{ width: "100vw" }}
+        transition={{ duration: 0.5 }}
+        type="text"
+        className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        placeholder="Tips(y) for your drinks!"
+        onChange={handleOnChange}
+      />
     </div>
   );
-}
+};
 
-export default SearchInput
+export default SearchInput;

@@ -1,9 +1,8 @@
-const Container = ({ children } : { children: React.ReactNode }) => {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 mb-24">
-      {children}
-    </main>
-  )
-}
+"use client";
+import React from 'react';
 
-export default Container
+const Container = ({ children }: { children: React.ReactNode }) => {
+  return <div className="max-w-7xl mx-auto px-4">{children}</div>;
+};
+
+export default Container;

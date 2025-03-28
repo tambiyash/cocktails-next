@@ -1,33 +1,49 @@
 "use client";
 import Image from 'next/image';
-import Link from 'next/link'
-import { useState } from 'react';
+import Link from 'next/link';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { CocktailCard } from '@/types/cocktail';
 import Tag from './Tag';
 
 const Card = ({ href, title, img, ingredients, description }: CocktailCard) => {
-  const [hover, setHover] = useState(false);
   return (
-    <Link href={href || ""} className="px-4 py-6 flex flex-col justify-center sm:py-12" onMouseOver={(e) => setHover(true)} onMouseOut={(e) => setHover(false)}>
-      <div className="relative py-3 sm:max-w-xl">
-        <div className="flex flex-col items-center justify-center py-2">
-          <div className={`absolute inset-0 bg-gradient-to-r from-indigo-200 to-purple-600 shadow-lg transform duration-300 ease-in-out rounded-3xl ${hover && "rotate-0" || "rotate-6"}`}></div>
-          <div className="min-w-full relative px-4 py-10 flex flex-col flex-nowrap items-center bg-white shadow-lg sm:rounded-3xl">
-            <h1 className="text-3xl font-bold">
-              {title}
-            </h1>
-            <div className="flex flex-row flex-wrap p-4 h-auto">
-              {ingredients.map(item => <Tag key={item.name} name={item.name} className="mb-2"/>)}
-            </div>
-            {description && <h2 className="pt-2 mb-4 text font-semibold line-clamp-2">
+    <motion.div
+      className="p-4 bg-white shadow-md rounded-lg hover:shadow-lg transition-shadow flex flex-col justify-between h-full"
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <Link href={href || ""} className="flex flex-col justify-between h-full">
+        {/* Title and Description */}
+        <div className="mb-4">
+          <h3 className="text-lg font-bold line-clamp-1 overflow-hidden text-ellipsis">{title}</h3>
+          {description && (
+            <p className="text-gray-600 line-clamp-2 overflow-hidden text-ellipsis">
               {description}
-            </h2>}
-            <Image src={img || ""} alt={title} width={150} height={150} className="rounded-full"/>
-          </div>
+            </p>
+          )}
         </div>
-      </div>
-    </Link>
-  )
-}
+
+        {/* Ingredients Tags */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {ingredients.map((item, idx) => (
+            <Tag key={idx} label={item.name} otherClassName="mb-0" />
+          ))}
+        </div>
+
+        {/* Image */}
+        <div className="flex justify-center">
+          <Image
+            src={img || ""}
+            alt={title}
+            width={150}
+            height={150}
+            className="rounded-full"
+          />
+        </div>
+      </Link>
+    </motion.div>
+  );
+};
 
 export default Card;

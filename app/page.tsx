@@ -3,7 +3,6 @@ import Card from "@/components/Card";
 import Cards from "@/components/Cards";
 import Container from "@/components/Container";
 import SearchInput from "@/components/SearchInput";
-import Keyboard from "@/components/Keyboard";
 import { Cocktail } from "@/types/cocktail";
 import { DEFAULT_SEARCH_COCKTAIL, SEARCH_COCKTAIL_BY_NAME } from "@/utils/constants";
 import { Ingredient, getAllIngredients } from "@/utils/mutation";

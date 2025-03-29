@@ -37,8 +37,14 @@ const Home = async ({ searchParams }: { searchParams: ISearchParams }) => {
   return (
     <Container>
       <SearchInput />
+      {!cocktails && (
+        <div className="mt-16 w-full flex flex-col justify-center items-center">
+          <h1 className="text-2xl text-gray-500">Sorry, No cocktails found.</h1>
+          <h3 className="mt-4">Try searching for some other one.</h3>
+        </div>
+      )}
       <Cards>
-        {cocktails.map((drink: Cocktail) => {
+        {cocktails?.map((drink: Cocktail) => {
           const ingredients: Ingredient[] = getAllIngredients(drink);
           return (
             <Card
